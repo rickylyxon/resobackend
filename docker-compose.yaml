@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    image: yourusername/resobackend  # Replace with your Docker Hub image name
+    environment:
+      - JWT_SECRET=${JWT_SECRET}     # Pulls from your local .env
+      - DATABASE_URL=${DATABASE_URL} # Pulls from your local .env
+      - PORT=${PORT}                 # Pulls from your local .env
+    ports:
+      - "4000:4000"  # Map container port 4000 to host port 4000
+    depends_on:
+      - db  # Only needed if you have the db service running in the same Compose
+    restart: always  # Automatically restart on failure
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Lyxon1234   # Replace with your DB password
+      POSTGRES_DB: reso
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persists data
+    ports:
+      - "5432:5432"  # Expose the database port
+
+volumes:
+  postgres_data:
