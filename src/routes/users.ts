@@ -306,7 +306,7 @@ router.get(
 
       res.status(200).json({
         message: "Not Registered Yet",
-        fee: eventExist.fee,
+        eventDetails: eventExist,
         eventRegistered: false,
       });
       return;
